@@ -195,6 +195,166 @@
   }
 
   .fade-up { animation: fadeUp .6s ease forwards; }
+
+  /* ══════════════════════════════
+     WATCHER GATE
+  ══════════════════════════════ */
+
+  /* Flow steps */
+  .gate-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .gate-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 24px 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,.08);
+    background: rgba(255,255,255,.03);
+    min-width: 140px;
+    transition: border-color .3s, box-shadow .3s, transform .3s;
+    cursor: default;
+  }
+
+  .gate-step:hover {
+    transform: translateY(-4px);
+  }
+
+  .gate-step.step-identity:hover  { border-color: rgba(34,211,238,.5);  box-shadow: 0 0 30px rgba(34,211,238,.15); }
+  .gate-step.step-nft:hover       { border-color: rgba(250,204,21,.5);  box-shadow: 0 0 30px rgba(250,204,21,.12); }
+  .gate-step.step-gate:hover      { border-color: rgba(124,58,237,.5);  box-shadow: 0 0 30px rgba(124,58,237,.18); }
+  .gate-step.step-payment:hover   { border-color: rgba(34,197,94,.5);   box-shadow: 0 0 30px rgba(34,197,94,.15);  }
+
+  .gate-step .step-icon {
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  .gate-step .step-label {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: .85rem;
+    text-align: center;
+  }
+
+  .gate-step .step-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: .65rem;
+    color: rgba(255,255,255,.35);
+    text-align: center;
+  }
+
+  .gate-arrow {
+    font-size: 1.4rem;
+    color: rgba(255,255,255,.2);
+    margin: 0 6px;
+    flex-shrink: 0;
+  }
+
+  /* Watcher Gate simulator */
+  .wg-status-idle    { color: rgba(255,255,255,.4); }
+  .wg-status-check   { color: #facc15; }
+  .wg-status-ok      { color: #22c55e; }
+  .wg-status-blocked { color: #ef4444; }
+
+  /* Gate check rows */
+  .check-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-radius: 10px;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.06);
+    font-family: 'Space Mono', monospace;
+    font-size: .78rem;
+    transition: border-color .4s, background .4s;
+  }
+
+  .check-row.checking { border-color: rgba(250,204,21,.4); background: rgba(250,204,21,.05); }
+  .check-row.passed   { border-color: rgba(34,197,94,.4);  background: rgba(34,197,94,.05);  }
+  .check-row.failed   { border-color: rgba(239,68,68,.4);  background: rgba(239,68,68,.05);  }
+
+  /* Dashboard live gate log */
+  .gate-log-entry {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(255,255,255,.025);
+    border-left: 3px solid transparent;
+    font-family: 'Space Mono', monospace;
+    font-size: .72rem;
+    color: rgba(255,255,255,.6);
+    animation: fadeUp .4s ease forwards;
+  }
+
+  .gate-log-entry.log-ok      { border-left-color: #22c55e; }
+  .gate-log-entry.log-blocked { border-left-color: #ef4444; }
+  .gate-log-entry.log-pending { border-left-color: #facc15; }
+
+  /* Pulse dot */
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: .5; transform: scale(.7); }
+  }
+
+  .pulse-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    animation: pulse-dot 1.5s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  .dot-green  { background: #22c55e; }
+  .dot-red    { background: #ef4444; }
+  .dot-yellow { background: #facc15; }
+
+  /* Gate meter */
+  .gate-meter-bar {
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.06);
+    overflow: hidden;
+    margin-top: 6px;
+  }
+
+  .gate-meter-fill {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 1s ease;
+  }
+
+  /* Scan line animation on dashboard */
+  @keyframes scanline {
+    0%   { transform: translateY(-100%); }
+    100% { transform: translateY(400%); }
+  }
+
+  .scan-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: inherit;
+  }
+
+  .scan-overlay::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 40px;
+    background: linear-gradient(transparent, rgba(34,211,238,.04), transparent);
+    animation: scanline 3s linear infinite;
+  }
 </style>
 </head>
 
@@ -215,6 +375,7 @@
   <div class="hidden md:flex gap-8 text-sm text-gray-400">
     <a href="#identity">Identity</a>
     <a href="#payments">Payments</a>
+    <a href="#watcher-gate" style="color:#22d3ee;font-weight:700;">Watcher Gate</a>
     <a href="#ecosystem">Ecosystem</a>
     <a href="#nfts">NFTs</a>
     <a href="#whitepaper">Whitepaper</a>
@@ -421,6 +582,160 @@
 <div class="divider"></div>
 
 <!-- ══════════════════════════════
+     WATCHER GATE
+════════════════════════════════ -->
+<section id="watcher-gate" class="py-32 text-center">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <p class="version-badge mb-6">v12 · Core Feature</p>
+    <h2 class="section-title">Watcher Gate</h2>
+    <p class="text-gray-400 mt-4 mb-4 text-lg max-w-2xl mx-auto">
+      Every payment passes through three validation layers before it settles.
+      Identity, NFT tier, and transaction integrity — all checked in sequence.
+    </p>
+    <p class="mono text-xs text-cyan-500 mb-16 tracking-widest">IDENTITY CHECK · NFT GATE · PAYMENT VALIDATION</p>
+
+    <!-- ── FLOW DIAGRAM ── -->
+    <div class="gate-flow mb-20">
+
+      <div class="gate-step step-identity">
+        <div class="step-icon">🪪</div>
+        <div class="step-label text-cyan-300">Identity</div>
+        <div class="step-sub">@username<br>→ TFLOW ID</div>
+      </div>
+
+      <div class="gate-arrow">→</div>
+
+      <div class="gate-step step-nft">
+        <div class="step-icon">🏅</div>
+        <div class="step-label text-yellow-300">NFT Check</div>
+        <div class="step-sub">Tier verified<br>Gold/Diamond/Genesis</div>
+      </div>
+
+      <div class="gate-arrow">→</div>
+
+      <div class="gate-step step-gate">
+        <div class="step-icon">🔐</div>
+        <div class="step-label text-purple-300">Watcher Gate</div>
+        <div class="step-sub">Validation<br>& clearance</div>
+      </div>
+
+      <div class="gate-arrow">→</div>
+
+      <div class="gate-step step-payment">
+        <div class="step-icon">⚡</div>
+        <div class="step-label text-green-300">Settlement</div>
+        <div class="step-sub">TON network<br>confirmed</div>
+      </div>
+
+    </div>
+
+    <!-- ── TWO COLUMNS ── -->
+    <div class="grid lg:grid-cols-2 gap-8 mt-4">
+
+      <!-- LEFT : GATE SIMULATOR -->
+      <div class="glass p-8 rounded-3xl text-left relative scan-overlay" style="overflow:hidden;">
+        <div class="scan-overlay"></div>
+
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="text-lg font-bold">Gate Simulator</h3>
+          <span class="mono text-xs text-gray-500">Interactive</span>
+        </div>
+
+        <div class="space-y-3 mb-6">
+          <input id="wg-sender"   placeholder="@sender"          class="tflow-input text-sm" style="padding:.75rem;" />
+          <input id="wg-receiver" placeholder="@receiver"        class="tflow-input text-sm" style="padding:.75rem;" />
+          <input id="wg-amount"   placeholder="Amount (TFLOW)"   class="tflow-input text-sm" style="padding:.75rem;" />
+
+          <select id="wg-tier" class="tflow-input text-sm" style="padding:.75rem; cursor:pointer;">
+            <option value="">Select NFT Tier</option>
+            <option value="gold">Gold — Basic access</option>
+            <option value="diamond">Diamond — Advanced</option>
+            <option value="genesis">Genesis — Founding</option>
+          </select>
+        </div>
+
+        <button onclick="runWatcherGate()" class="btn-primary w-full" style="width:100%;">
+          Run Watcher Gate
+        </button>
+
+        <!-- CHECK ROWS -->
+        <div id="wg-checks" class="space-y-2 mt-6 hidden">
+          <div class="check-row" id="wg-c1">
+            <span>🪪 Identity Resolution</span>
+            <span id="wg-c1-status" class="wg-status-idle">—</span>
+          </div>
+          <div class="check-row" id="wg-c2">
+            <span>🏅 NFT Tier Verification</span>
+            <span id="wg-c2-status" class="wg-status-idle">—</span>
+          </div>
+          <div class="check-row" id="wg-c3">
+            <span>💰 Balance & Amount Check</span>
+            <span id="wg-c3-status" class="wg-status-idle">—</span>
+          </div>
+          <div class="check-row" id="wg-c4">
+            <span>🔐 Gate Clearance</span>
+            <span id="wg-c4-status" class="wg-status-idle">—</span>
+          </div>
+        </div>
+
+        <!-- FINAL VERDICT -->
+        <div id="wg-verdict" class="hidden mt-6 p-4 rounded-2xl text-center mono font-bold text-lg"></div>
+      </div>
+
+      <!-- RIGHT : LIVE DASHBOARD -->
+      <div class="glass p-8 rounded-3xl text-left relative" style="overflow:hidden;">
+        <div class="scan-overlay"></div>
+
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="text-lg font-bold">Live Gate Dashboard</h3>
+          <div class="flex items-center gap-2">
+            <span class="pulse-dot dot-green"></span>
+            <span class="mono text-xs text-green-400">LIVE</span>
+          </div>
+        </div>
+
+        <!-- METRICS -->
+        <div class="grid grid-cols-3 gap-3 mb-6">
+          <div class="glass p-3 rounded-xl text-center">
+            <div class="text-cyan-400 font-black text-xl" id="dash-passed">0</div>
+            <div class="text-xs text-gray-500 mt-1">Passed</div>
+          </div>
+          <div class="glass p-3 rounded-xl text-center">
+            <div class="text-red-400 font-black text-xl" id="dash-blocked">0</div>
+            <div class="text-xs text-gray-500 mt-1">Blocked</div>
+          </div>
+          <div class="glass p-3 rounded-xl text-center">
+            <div class="text-yellow-400 font-black text-xl" id="dash-rate">—</div>
+            <div class="text-xs text-gray-500 mt-1">Pass Rate</div>
+          </div>
+        </div>
+
+        <!-- SUCCESS METER -->
+        <div class="mb-6">
+          <div class="flex justify-between text-xs text-gray-500 mb-1">
+            <span class="mono">Gate throughput</span>
+            <span class="mono" id="dash-throughput">0%</span>
+          </div>
+          <div class="gate-meter-bar">
+            <div class="gate-meter-fill" id="dash-bar" style="width:0%; background: linear-gradient(90deg,#7c3aed,#22d3ee);"></div>
+          </div>
+        </div>
+
+        <!-- LIVE LOG -->
+        <div class="mono text-xs text-gray-500 mb-3 tracking-widest uppercase">Gate Log</div>
+        <div id="gate-log" class="space-y-2" style="max-height:220px; overflow:hidden;"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════
      ECOSYSTEM
 ════════════════════════════════ -->
 <section id="ecosystem" class="py-32 text-center">
@@ -570,7 +885,149 @@
      SCRIPTS
 ════════════════════════════════ -->
 <script>
-  /* ─ Identity Generator ─ */
+  /* ─ Watcher Gate Simulator ─ */
+
+  let dashPassed  = 0;
+  let dashBlocked = 0;
+
+  function resetChecks() {
+    ["wg-c1","wg-c2","wg-c3","wg-c4"].forEach(id => {
+      const row = document.getElementById(id);
+      row.className = "check-row";
+    });
+    ["wg-c1-status","wg-c2-status","wg-c3-status","wg-c4-status"].forEach(id => {
+      const el = document.getElementById(id);
+      el.className = "wg-status-idle";
+      el.innerText = "—";
+    });
+    document.getElementById("wg-verdict").classList.add("hidden");
+  }
+
+  function setCheck(rowId, statusId, state, label) {
+    const row = document.getElementById(rowId);
+    const st  = document.getElementById(statusId);
+    row.className = "check-row " + (state === "ok" ? "passed" : state === "fail" ? "failed" : "checking");
+    st.className  = "wg-status-" + (state === "ok" ? "ok" : state === "fail" ? "blocked" : "check");
+    st.innerText  = label;
+  }
+
+  function runWatcherGate() {
+    const sender   = document.getElementById("wg-sender").value   || "@sender";
+    const receiver = document.getElementById("wg-receiver").value || "@receiver";
+    const amount   = parseFloat(document.getElementById("wg-amount").value) || 0;
+    const tier     = document.getElementById("wg-tier").value;
+
+    const checks = document.getElementById("wg-checks");
+    const verdict = document.getElementById("wg-verdict");
+    checks.classList.remove("hidden");
+    verdict.classList.add("hidden");
+    resetChecks();
+
+    // Step 1 — Identity
+    setTimeout(() => {
+      setCheck("wg-c1","wg-c1-status","checking","Resolving...");
+    }, 300);
+    setTimeout(() => {
+      const ok = sender.includes("@") && receiver.includes("@");
+      setCheck("wg-c1","wg-c1-status", ok ? "ok" : "fail", ok ? "✓ Verified" : "✗ Invalid");
+    }, 1100);
+
+    // Step 2 — NFT Tier
+    setTimeout(() => {
+      setCheck("wg-c2","wg-c2-status","checking","Checking tier...");
+    }, 1500);
+    setTimeout(() => {
+      const ok = tier !== "";
+      setCheck("wg-c2","wg-c2-status", ok ? "ok" : "fail", ok ? "✓ " + tier.charAt(0).toUpperCase()+tier.slice(1) : "✗ No tier");
+    }, 2400);
+
+    // Step 3 — Amount
+    setTimeout(() => {
+      setCheck("wg-c3","wg-c3-status","checking","Validating...");
+    }, 2800);
+    setTimeout(() => {
+      const ok = amount > 0;
+      setCheck("wg-c3","wg-c3-status", ok ? "ok" : "fail", ok ? "✓ " + amount + " TFLOW" : "✗ Invalid amount");
+    }, 3600);
+
+    // Step 4 — Gate Clearance
+    setTimeout(() => {
+      setCheck("wg-c4","wg-c4-status","checking","Gate processing...");
+    }, 4000);
+    setTimeout(() => {
+      const identityOk = sender.includes("@") && receiver.includes("@");
+      const tierOk     = tier !== "";
+      const amountOk   = amount > 0;
+      const cleared    = identityOk && tierOk && amountOk;
+
+      setCheck("wg-c4","wg-c4-status", cleared ? "ok" : "fail", cleared ? "✓ CLEARED" : "✗ BLOCKED");
+
+      verdict.classList.remove("hidden");
+      if (cleared) {
+        verdict.style.background = "rgba(34,197,94,.1)";
+        verdict.style.border     = "1px solid rgba(34,197,94,.3)";
+        verdict.style.color      = "#22c55e";
+        verdict.innerHTML = "✓ GATE CLEARED<br><span style='font-size:.75rem;opacity:.7;'>" + sender + " → " + amount + " TFLOW → " + receiver + "</span>";
+        dashPassed++;
+        logGateEvent("ok", sender + " → " + amount + " TFLOW → " + receiver + "  [" + tier + "]");
+      } else {
+        verdict.style.background = "rgba(239,68,68,.1)";
+        verdict.style.border     = "1px solid rgba(239,68,68,.3)";
+        verdict.style.color      = "#ef4444";
+        verdict.innerHTML = "✗ GATE BLOCKED<br><span style='font-size:.75rem;opacity:.7;'>Transaction rejected by Watcher Gate</span>";
+        dashBlocked++;
+        logGateEvent("blocked", "Rejected: " + (sender || "?") + " → " + (amount || "0") + " TFLOW [no tier]");
+      }
+      updateDashMetrics();
+    }, 5000);
+  }
+
+  /* ─ Dashboard ─ */
+  function updateDashMetrics() {
+    const total = dashPassed + dashBlocked;
+    const rate  = total > 0 ? Math.round((dashPassed / total) * 100) : 0;
+    document.getElementById("dash-passed").innerText    = dashPassed;
+    document.getElementById("dash-blocked").innerText   = dashBlocked;
+    document.getElementById("dash-rate").innerText      = rate + "%";
+    document.getElementById("dash-throughput").innerText = rate + "%";
+    document.getElementById("dash-bar").style.width     = rate + "%";
+  }
+
+  function logGateEvent(type, text) {
+    const log  = document.getElementById("gate-log");
+    const dot  = type === "ok" ? "dot-green" : type === "blocked" ? "dot-red" : "dot-yellow";
+    const cls  = type === "ok" ? "log-ok"    : type === "blocked" ? "log-blocked" : "log-pending";
+    const time = new Date().toLocaleTimeString("fr-FR", { hour:"2-digit", minute:"2-digit", second:"2-digit" });
+    const el   = document.createElement("div");
+    el.className = "gate-log-entry " + cls;
+    el.innerHTML = `<span class="pulse-dot ${dot}"></span><span style="color:rgba(255,255,255,.35)">${time}</span><span>${text}</span>`;
+    log.prepend(el);
+    if (log.children.length > 8) log.removeChild(log.lastChild);
+  }
+
+  /* ─ Auto-simulate live dashboard events ─ */
+  const autoUsers   = ["@alex","@nina","@john","@sara","@bot_01","@merchant","@bluezone"];
+  const autoTiers   = ["gold","diamond","genesis"];
+  const autoOutcome = ["ok","ok","ok","ok","blocked"]; // 80% pass rate
+
+  setInterval(() => {
+    const u1  = autoUsers[Math.floor(Math.random() * autoUsers.length)];
+    const u2  = autoUsers[Math.floor(Math.random() * autoUsers.length)];
+    const amt = (Math.random() * 50 + 1).toFixed(1);
+    const t   = autoTiers[Math.floor(Math.random() * autoTiers.length)];
+    const res = autoOutcome[Math.floor(Math.random() * autoOutcome.length)];
+
+    if (res === "ok") {
+      dashPassed++;
+      logGateEvent("ok", u1 + " → " + amt + " TFLOW → " + u2 + "  [" + t + "]");
+    } else {
+      dashBlocked++;
+      logGateEvent("blocked", "Blocked: " + u1 + " → " + amt + " TFLOW [tier mismatch]");
+    }
+    updateDashMetrics();
+  }, 2800);
+
+
   function generateTFLOWIdentity() {
     const input = document.getElementById("usernameInput").value || "@guest";
     const username = input.replace("@", "").toLowerCase();
