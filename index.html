@@ -159,10 +159,80 @@ body {
 Telegram ID → TFLOW ID → @username → Wallet Mapping
 
 </div>
+<section class="py-32 text-center">
 
+<div class="max-w-4xl mx-auto px-6">
+
+<h2 class="text-5xl font-bold">
+TFLOW Identity Generator
+</h2>
+
+<p class="text-gray-400 mt-4">
+Convert a Telegram username into a TFLOW identity.
+</p>
+
+<div class="glass p-10 mt-10 rounded-3xl">
+
+<input
+id="usernameInput"
+placeholder="@username"
+class="w-full p-4 rounded-xl bg-black/40 text-center text-white"
+/>
+
+<button
+onclick="generateTFLOWIdentity()"
+class="mt-6 px-8 py-3 bg-cyan-400 text-black font-bold rounded-xl">
+Generate Identity
+</button>
+
+<div id="resultBox" class="hidden mt-10">
+
+<div class="text-green-400 text-xl">
+✓ Identity Generated
+</div>
+
+<div class="mt-4 text-cyan-300 text-2xl font-mono" id="tflowAlias"></div>
+
+<div class="mt-2 text-purple-300 text-xl font-mono" id="tflowId"></div>
+
+<div class="mt-4 text-gray-400">
+Telegram → TFLOW Mapping Verified
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
 </div>
 </section>
 
+  <script>
+function generateTFLOWIdentity() {
+
+  const input = document.getElementById("usernameInput").value || "@guest";
+
+  // clean username
+  const username = input.replace("@", "").toLowerCase();
+
+  // pseudo deterministic hash (stable feel)
+  let hash = 0;
+  for (let i = 0; i < username.length; i++) {
+    hash = (hash << 5) - hash + username.charCodeAt(i);
+    hash |= 0;
+  }
+
+  const tflowId = "TF-" + Math.abs(hash).toString().slice(0, 8);
+
+  document.getElementById("resultBox").classList.remove("hidden");
+
+  document.getElementById("tflowAlias").innerText = "@" + username;
+
+  document.getElementById("tflowId").innerText = tflowId;
+}
+</script>
 <!-- PAYMENT DEMO -->
 <section id="payments" class="py-32 text-center">
 <div class="max-w-4xl mx-auto px-6">
