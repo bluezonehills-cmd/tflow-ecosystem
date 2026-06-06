@@ -245,7 +245,96 @@ function generateTFLOWIdentity() {
 
 </div>
 </section>
+<section class="py-32 text-center">
 
+<div class="max-w-4xl mx-auto px-6">
+
+<h2 class="text-5xl font-bold">
+TFLOW Payment Engine
+</h2>
+
+<p class="text-gray-400 mt-4">
+Send crypto like a message. No wallets. Only identities.
+</p>
+
+<div class="glass p-10 mt-10 rounded-3xl">
+
+<!-- INPUTS -->
+<input
+id="fromUser"
+placeholder="@sender"
+class="w-full p-4 rounded-xl bg-black/40 text-center mb-4"
+/>
+
+<input
+id="toUser"
+placeholder="@receiver"
+class="w-full p-4 rounded-xl bg-black/40 text-center mb-4"
+/>
+
+<input
+id="amount"
+placeholder="Amount (TFLOW)"
+class="w-full p-4 rounded-xl bg-black/40 text-center"
+/>
+
+<button
+onclick="sendTFLOWPayment()"
+class="mt-6 px-8 py-3 bg-purple-500 text-white font-bold rounded-xl">
+Send Payment
+</button>
+
+<!-- STATUS -->
+<div id="paymentStatus" class="hidden mt-10 text-cyan-300 text-xl font-mono">
+Initializing transaction...
+</div>
+
+</div>
+
+</div>
+
+</section> 
+  
+<script>
+function sendTFLOWPayment() {
+
+  const status = document.getElementById("paymentStatus");
+  status.classList.remove("hidden");
+
+  const from = document.getElementById("fromUser").value || "@sender";
+  const to = document.getElementById("toUser").value || "@receiver";
+  const amount = document.getElementById("amount").value || "0";
+
+  let steps = [
+    "Resolving sender identity...",
+    "Verifying receiver identity...",
+    "Checking TFLOW ID mapping...",
+    "Connecting to TON network...",
+    "Broadcasting transaction...",
+    "Waiting confirmation..."
+  ];
+
+  let i = 0;
+
+  const interval = setInterval(() => {
+    status.innerText = steps[i];
+    i++;
+
+    if (i === steps.length) {
+      clearInterval(interval);
+
+      setTimeout(() => {
+        status.innerHTML = `
+          <span style="color:#22c55e">✓ Transaction Successful</span><br><br>
+          ${from} → ${amount} TFLOW → ${to}
+        `;
+      }, 800);
+    }
+
+  }, 900);
+}
+</script>
+  
 <!-- ECOSYSTEM -->
 <section id="ecosystem" class="py-32 text-center">
 <div class="max-w-4xl mx-auto mx-auto">
