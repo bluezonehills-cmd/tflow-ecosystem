@@ -53,6 +53,12 @@ body {
   -webkit-text-fill-color: transparent;
   animation: shine 8s linear infinite;
 }
+.glass:hover {
+  border-color: rgba(34,211,238,0.4);
+  box-shadow: 0 0 25px rgba(34,211,238,0.15);
+  transform: translateY(-3px);
+  transition: 0.3s ease;
+}
 
 @keyframes shine {
   to { background-position: 200% center; }
@@ -466,19 +472,61 @@ setInterval(addRandomActivity, 3000);
 
 <!-- NFT -->
 <section id="nfts" class="py-32 text-center">
-<div class="max-w-5xl mx-auto px-6">
 
-<h2 class="text-5xl font-bold">NFT Access</h2>
+<div class="max-w-6xl mx-auto px-6">
 
-<div class="grid md:grid-cols-3 gap-6 mt-12">
+<h2 class="text-5xl font-bold">
+Genesis NFT Layer
+</h2>
 
-<div class="glass p-6">Gold</div>
-<div class="glass p-6">Diamond</div>
-<div class="glass p-6">Genesis</div>
+<p class="text-gray-400 mt-4">
+Each NFT represents access, status, and ecosystem power.
+</p>
 
+<div class="grid md:grid-cols-3 gap-8 mt-16">
+
+<!-- GOLD -->
+<div class="glass p-8 rounded-3xl border border-yellow-400/30 hover:scale-105 transition">
+<div class="text-yellow-400 text-2xl font-bold">Gold</div>
+<p class="text-gray-400 mt-4">
+Entry access to TFLOW ecosystem.
+</p>
+<div class="mt-6 text-yellow-300">
+Light Tier Energy
+</div>
+</div>
+
+<!-- DIAMOND -->
+<div class="glass p-8 rounded-3xl border border-cyan-400/40 hover:scale-105 transition">
+<div class="text-cyan-300 text-2xl font-bold">Diamond</div>
+<p class="text-gray-400 mt-4">
+Advanced privileges + cashback system.
+</p>
+<div class="mt-6 text-cyan-200">
+Premium Flow Identity
+</div>
+</div>
+
+<!-- GENESIS -->
+<div class="glass p-8 rounded-3xl border border-purple-400/40 hover:scale-105 transition">
+<div class="text-purple-300 text-2xl font-bold">Genesis</div>
+<p class="text-gray-400 mt-4">
+Founding tier of TFLOW network.
+</p>
+<div class="mt-6 text-purple-200">
+Core System Access
+</div>
 </div>
 
 </div>
+
+</div>
+
+<!-- WHITEPAPER V10 -->
+<section id="whitepaper">
+...
+</section>
+  
 </section>
 
 <!-- CTA -->
