@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TFLOW Ecosystem</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:#060816;
+  color:white;
+  overflow-x:hidden;
+}
+
+.gradient-bg{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  background:
+  radial-gradient(circle at 20% 20%, rgba(124,58,237,.25), transparent 35%),
+  radial-gradient(circle at 80% 70%, rgba(34,211,238,.18), transparent 35%),
+  #060816;
+}
+
+.grid-overlay{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background-image:
+  linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size:50px 50px;
+}
+
+.glass{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(20px);
+}
+
+.hero-title{
+  background:linear-gradient(
+  90deg,
+  #ffffff,
+  #22d3ee,
+  #7c3aed,
+  #ffffff
+  );
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 8s linear infinite;
+}
+
+@keyframes shine{
+  to{
+    background-position:200% center;
+  }
+}
+
+.orbit{
+  width:350px;
+  height:350px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:50%;
+  position:relative;
+}
+
+.center-node{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+
+.node{
+  position:absolute;
+  background:#111827;
+  border:1px solid rgba(255,255,255,.1);
+  padding:10px 16px;
+  border-radius:999px;
+}
+
+.n1{top:-20px;left:50%;transform:translateX(-50%);}
+.n2{right:-30px;top:50%;transform:translateY(-50%);}
+.n3{bottom:-20px;left:50%;transform:translateX(-50%);}
+.n4{left:-30px;top:50%;transform:translateY(-50%);}
+</style>
+</head>
+
+<body>
+
+<div class="gradient-bg"></div>
+<div class="grid-overlay"></div>
+
+<!-- NAV -->
+
+<nav class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+
+<div class="font-bold text-xl">
+TFLOW
+</div>
+
+<div class="hidden md:flex gap-8 text-sm text-gray-400">
+<a href="#identity">Identity</a>
+<a href="#payments">Payments</a>
+<a href="#ecosystem">Ecosystem</a>
+<a href="#nfts">NFTs</a>
+</div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="min-h-screen flex items-center">
+
+<div class="max-w-7xl mx-auto px-6 w-full">
+
+<div class="grid lg:grid-cols-2 gap-16 items-center">
+
+<div>
+
+<p class="text-cyan-400 mb-4">
+Identity • Payments • Ecosystem
+</p>
+
+<h1 class="hero-title text-6xl lg:text-7xl font-black leading-tight">
+Crypto Was Built For Wallets.
+<br>
+TFLOW Was Built For People.
+</h1>
+
+<p class="text-gray-400 text-xl mt-8 max-w-xl">
+Send crypto as easily as sending a message.
+No wallet addresses.
+No copy-paste mistakes.
+Just identity.
+</p>
+
+<div class="flex flex-wrap gap-4 mt-10">
+
+<button class="px-8 py-4 rounded-xl bg-cyan-400 text-black font-bold">
+Enter Ecosystem
+</button>
+
+<button class="px-8 py-4 rounded-xl glass">
+Read Whitepaper
+</button>
+
+</div>
+
+</div>
+
+<div>
+
+<div class="glass p-8 rounded-3xl">
+
+<div class="text-gray-500 text-sm mb-4">
+LIVE PAYMENT DEMO
+</div>
+
+<div class="text-3xl font-mono text-cyan-300">
+@john
+</div>
+
+<div class="text-center text-gray-500 text-2xl py-4">
+↓
+</div>
+
+<div class="text-center text-xl">
+Send 10 TFLOW
+</div>
+
+<div class="text-center text-gray-500 text-2xl py-4">
+↓
+</div>
+
+<div class="text-3xl font-mono text-purple-400">
+@sarah
+</div>
+
+<div class="mt-8 p-4 rounded-xl bg-green-500/10 border border-green-500/20">
+✓ Transaction Completed
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PROBLEM -->
+
+<section class="py-32">
+
+<div class="max-w-6xl mx-auto px-6 text-center">
+
+<h2 class="text-5xl font-bold">
+The Problem
+</h2>
+
+<p class="text-gray-400 mt-6">
+Blockchain remains too complex for everyday users.
+</p>
+
+<div class="grid md:grid-cols-2 gap-8 mt-16">
+
+<div class="glass p-8 rounded-2xl">
+<h3 class="text-red-400 text-xl mb-6">
+Traditional Crypto
+</h3>
+
+<div class="space-y-4 text-gray-400">
+<p>Copy Address</p>
+<p>Verify Address</p>
+<p>Paste Address</p>
+<p>Hope Nothing Goes Wrong</p>
+</div>
+</div>
+
+<div class="glass p-8 rounded-2xl">
+<h3 class="text-cyan-400 text-xl mb-6">
+TFLOW
+</h3>
+
+<div class="space-y-4">
+<p>Select Contact</p>
+<p>Enter Amount</p>
+<p>Send</p>
+<p>Done</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- IDENTITY -->
+
+<section id="identity" class="py-32">
+
+<div class="max-w-6xl mx-auto px-6 text-center">
+
+<h2 class="text-5xl font-bold">
+Identity Layer
+</h2>
+
+<p class="text-gray-400 mt-6">
+One identity for every interaction.
+</p>
+
+<div class="glass rounded-3xl p-10 mt-16">
+
+<div class="text-cyan-300 text-xl font-mono">
+Telegram ID
+</div>
+
+<div class="py-4 text-gray-500">↓</div>
+
+<div class="text-white text-xl font-mono">
+TFLOW ID
+</div>
+
+<div class="py-4 text-gray-500">↓</div>
+
+<div class="text-purple-400 text-3xl font-bold">
+@bluezone
+</div>
+
+<div class="py-4 text-gray-500">↓</div>
+
+<div class="text-gray-300">
+Encrypted Wallet Mapping
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PAYMENTS -->
+
+<section id="payments" class="py-32">
+
+<div class="max-w-6xl mx-auto px-6 text-center">
+
+<h2 class="text-5xl font-bold">
+Payments Reinvented
+</h2>
+
+<p class="text-gray-400 mt-6">
+Human-first crypto transfers.
+</p>
+
+<div class="glass rounded-3xl p-10 mt-16">
+
+<div class="text-4xl font-mono text-cyan-300">
+@merchant
+</div>
+
+<div class="text-gray-500 py-4">
+receives
+</div>
+
+<div class="text-5xl font-bold">
+50 TFLOW
+</div>
+
+<div class="mt-8 text-green-400">
+Instant • Simple • Secure
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ECOSYSTEM -->
+
+<section id="ecosystem" class="py-32">
+
+<div class="max-w-6xl mx-auto px-6 text-center">
+
+<h2 class="text-5xl font-bold mb-16">
+TFLOW Ecosystem
+</h2>
+
+<div class="flex justify-center">
+
+<div class="orbit">
+
+<div class="center-node glass px-6 py-4 rounded-full">
+TFLOW
+</div>
+
+<div class="node n1">Identity</div>
+<div class="node n2">Payments</div>
+<div class="node n3">AIOS</div>
+<div class="node n4">NFTs</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- NFT -->
+
+<section id="nfts" class="py-32">
+
+<div class="max-w-6xl mx-auto px-6">
+
+<h2 class="text-center text-5xl font-bold">
+Genesis NFT Access
+</h2>
+
+<div class="grid md:grid-cols-3 gap-8 mt-16">
+
+<div class="glass p-8 rounded-3xl">
+<h3 class="text-yellow-400 text-2xl">Gold</h3>
+<p class="text-gray-400 mt-4">
+Core ecosystem access.
+</p>
+</div>
+
+<div class="glass p-8 rounded-3xl border border-cyan-400/30">
+<h3 class="text-cyan-400 text-2xl">Diamond</h3>
+<p class="text-gray-400 mt-4">
+Premium ecosystem privileges.
+</p>
+</div>
+
+<div class="glass p-8 rounded-3xl border border-purple-400/30">
+<h3 class="text-purple-400 text-2xl">
+Genesis Investor
+</h3>
+<p class="text-gray-400 mt-4">
+Founding ecosystem status.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="py-40">
+
+<div class="max-w-4xl mx-auto text-center px-6">
+
+<h2 class="text-6xl font-black">
+The Next Billion Crypto Users
+<br>
+Won't Use Wallet Addresses.
+</h2>
+
+<p class="text-gray-400 mt-8 text-xl">
+They'll use identities.
+</p>
+
+<button class="mt-10 px-10 py-5 rounded-2xl bg-cyan-400 text-black font-bold text-lg">
+Join TFLOW
+</button>
+
+</div>
+
+</section>
+
+<footer class="py-10 text-center text-gray-500">
+© 2026 TFLOW Ecosystem. All rights reserved.
+</footer>
+
+</body>
+</html>
